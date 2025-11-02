@@ -52,7 +52,7 @@ void list_expand(List *this, size_t capacity) {
 	if(this->capacity >= capacity) return;
 
 	if(this->capacity == 0) this->capacity = INITIAL_CAPACITY;
-	while(this->capacity > capacity) this->capacity <<= 1;
+	while(this->capacity < capacity) this->capacity <<= 1;
 
 	this->data = realloc(this->data, this->capacity * this->dataSize);
 };
