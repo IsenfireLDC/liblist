@@ -6,7 +6,8 @@ FILES.SRC:=$(shell if [ -d $(DIR.SRC) ]; then find $(DIR.SRC) -name '*.c' -type 
 FILES.BIN:=$(patsubst $(DIR.SRC)/%.c,$(DIR.BIN)/%.c.o,$(FILES.SRC))
 FILES.DEP:=$(FILES.BIN:.o=.d)
 
-FILES.BIN.LIB:=$(patsubst $(DIR.SRC)/%.c,$(DIR.BIN)/%.c.so,$(FILES.SRC))
+# Filter out main from library files
+FILES.BIN.LIB:=$(patsubst $(DIR.SRC)/%.c,$(DIR.BIN)/%.c.so,$(filter-out %/main.c,$(FILES.SRC)))
 FILES.DEP.LIB:=$(FILES.BIN.LIB:.o=.d)
 
 PROJ.EXEC:=$(DIR.OUT)/$(PROJ.NAME)
@@ -32,10 +33,10 @@ all: $(PROJ.EXEC) $(PROJ.LIBSH)
 dirs: $(DIR.SRC)/ $(DIR.BIN)/ $(DIR.INC)/
 
 clean:
-	@rm -f $(FILES.BIN) $(FILES.DEP) $(PROJ.EXEC) $(PROJ.LIBSH)
+	@rm -f $(FILES.BIN) $(FILES.DEP) $(PROJ.EXEC)
+	@rm -f $(FILES.BIN.LIB) $(FILES.DEP.LIB) $(PROJ.LIBSH)
 
 export:
-	#@cp -vut /home/icenfire/projects/Software/bin $(PROJ.EXEC) $(PROJ.LIBSH)
 	@cp -vut /home/icenfire/projects/Software/bin $(PROJ.LIBSH)
 	@cp -vurt /home/icenfire/projects/Software/include $(DIR.INC)/*
 
@@ -49,7 +50,7 @@ $(PROJ.EXEC): $(FILES.BIN)
 	gcc -MP -MMD -o $@ $^ $(FLAGS) $(FLAGS.EXEC)
 
 $(PROJ.LIBSH): $(FILES.BIN.LIB)
-	gcc -MP -MMD -o $@ $^ $(FLAGS) $(FLAGS.LIBSH)
+	gcc -MP -MMD -shared -o $@ $^ $(FLAGS) $(FLAGS.LIBSH)
 
 # Add the target directory as a prerequisite when building
 .SECONDEXPANSION:
