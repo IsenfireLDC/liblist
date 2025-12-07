@@ -27,6 +27,8 @@ void list_remove(List *restrict, ListIndex, /*optional*/ void *restrict);
 void list_set(List *restrict, ListIndex, const void *restrict);
 void list_get(const List *restrict, ListIndex, void *restrict);
 
+void* list_getref(List*, ListIndex);
+
 void list_push(List *restrict, const void *restrict);
 void list_pop(List *restrict, /*optional*/ void *restrict);
 

@@ -104,6 +104,14 @@ void list_get(const List *restrict this, ListIndex index, void *restrict data) {
 
 
 
+void* list_getref(List *this, ListIndex index) {
+	if(index >= this->size) return NULL;
+
+	return list_at(this, index);
+};
+
+
+
 void list_push(List *restrict this, const void *restrict data) {
 	if(this->size == this->capacity) list_expand(this, this->size + 1);
 
