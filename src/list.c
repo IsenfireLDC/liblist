@@ -104,6 +104,21 @@ void list_get(const List *restrict this, ListIndex index, void *restrict data) {
 
 
 
+void* list_allocate(List *this, ListIndex index) {
+	if(index > this->size) return NULL;
+
+	if(this->size == this->capacity) list_expand(this, this->size + 1);
+
+	if(index < this->size) {
+		size_t elements = this->size - index;
+		memmove(list_at(this, index+1), list_at(this, index), elements * this->dataSize);
+	};
+
+	++this->size;
+
+	return list_at(this, index);
+};
+
 void* list_getref(List *this, ListIndex index) {
 	if(index >= this->size) return NULL;
 
