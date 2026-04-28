@@ -36,8 +36,9 @@ clean:
 	@rm -f $(FILES.BIN) $(FILES.DEP) $(PROJ.EXEC)
 	@rm -f $(FILES.BIN.LIB) $(FILES.DEP.LIB) $(PROJ.LIBSH)
 
-export:
-	@cp -vut /home/icenfire/projects/Software/bin $(PROJ.LIBSH)
+update:
+	@#@cp -vut /home/icenfire/projects/Software/bin $(PROJ.EXEC)
+	@cp -vut /home/icenfire/projects/Software/lib $(PROJ.LIBSH)
 	@cp -vurt /home/icenfire/projects/Software/include $(DIR.INC)/*
 
 
@@ -68,4 +69,4 @@ $(DIR.BIN)/%.c.so: $(DIR.SRC)/%.c | $$(@D)/
 # Keep generated directories
 .PRECIOUS: %/
 
-.PHONY: all dirs clean export
+.PHONY: all dirs clean update
