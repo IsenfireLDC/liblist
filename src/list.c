@@ -6,7 +6,7 @@
 
 #define INITIAL_CAPACITY 8
 
-#define list_at(list, idx) ( (list)->data + idx * (list)->dataSize )
+#define list_at(list, idx) ( (list)->data + (idx) * (list)->dataSize )
 
 
 void list_create(List *this, size_t dataSize) {
@@ -86,7 +86,7 @@ void list_remove(List *restrict this, ListIndex index, void *restrict data) {
 
 	if(index < this->size) {
 		size_t elements = this->size - index;
-		memcpy(list_at(this, index), list_at(this, index+1), elements * this->dataSize);
+		memmove(list_at(this, index), list_at(this, index+1), elements * this->dataSize);
 	};
 };
 

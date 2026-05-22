@@ -30,6 +30,9 @@ endif
 # Begin command rules
 all: $(PROJ.EXEC) $(PROJ.LIBSH)
 
+debug: $(FLAGS):=$(FLAGS) -g3 -ggdb
+debug: all
+
 dirs: $(DIR.SRC)/ $(DIR.BIN)/ $(DIR.INC)/
 
 clean:
