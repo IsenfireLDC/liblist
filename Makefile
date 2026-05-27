@@ -40,9 +40,9 @@ clean:
 	@rm -f $(FILES.BIN.LIB) $(FILES.DEP.LIB) $(PROJ.LIBSH)
 
 update:
-	@#@cp -vut /home/icenfire/projects/Software/bin $(PROJ.EXEC)
-	@cp -vut /home/icenfire/projects/Software/lib $(PROJ.LIBSH)
-	@cp -vurt /home/icenfire/projects/Software/include $(DIR.INC)/*
+	@#@cp -vut $(CUSTOM_LIBS_DIR)/bin $(PROJ.EXEC)
+	@cp -vut $(CUSTOM_LIBS_DIR)/lib $(PROJ.LIBSH)
+	@cp -vurt $(CUSTOM_LIBS_DIR)/include $(DIR.INC)/*
 
 
 # Include make dependency files
