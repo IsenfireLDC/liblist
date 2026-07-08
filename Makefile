@@ -15,7 +15,7 @@ PROJ.LIBSH:=$(DIR.OUT)/lib$(PROJ.NAME).so
 
 
 # Setup flags
-FLAGS:=$(FLAGS.PROJ) -I$(DIR.INC)
+FLAGS:=-I$(DIR.INC) $(FLAGS.PROJ)
 
 
 # Print file info

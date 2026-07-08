@@ -23,6 +23,23 @@ void list_destroy(List *this) {
 
 
 
+List* list_new(size_t dataSize) {
+	List *this = malloc(sizeof(List));
+	if(!this) return NULL;
+
+	list_create(this, dataSize);
+
+	return this;
+}
+
+void list_delete(List *this) {
+	list_destroy(this);
+
+	free(this);
+}
+
+
+
 void list_move(List *restrict dest, List *restrict src) {
 	memcpy((void*)&dest->dataSize, &src->dataSize, sizeof(src->dataSize));
 

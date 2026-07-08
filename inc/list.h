@@ -16,6 +16,9 @@ typedef struct List {
 void list_create(List*, size_t);
 void list_destroy(List*);
 
+List* list_new(size_t);
+void list_delete(List*);
+
 void list_move(List *restrict, List *restrict);
 void list_copy(List *restrict, const List *restrict);
 
