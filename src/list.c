@@ -58,9 +58,8 @@ void list_copy(List *restrict dest, const List *restrict src) {
 	dest->size = src->size;
 	dest->capacity = src->capacity;
 
-	size_t memSize = src->capacity * src->dataSize;
-	dest->data = malloc(memSize);
-	memcpy(dest->data, src->data, memSize);
+	dest->data = malloc(src->capacity * src->dataSize);
+	memcpy(dest->data, src->data, src->size * src->dataSize);
 };
 
 
